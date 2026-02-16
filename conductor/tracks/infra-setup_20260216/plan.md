@@ -34,12 +34,12 @@ Inicializar la aplicación y la estructura de módulos.
 Definir las interfaces para evitar el acoplamiento a librerías externas.
 
 ### Tasks
-- [ ] Task 3.1: Crear interfaces para el `CacheService` (Wrapper de Redis).
-- [ ] Task 3.2: Crear interfaces para el `Repository` base (Wrapper de DB).
-- [ ] Task 3.3: Implementar Mocks iniciales de estos servicios para tests.
+- [x] Task 3.1: Crear interfaces para el `CacheService` (Wrapper de Redis).
+- [x] Task 3.2: Crear interfaces para el `Repository` base (Wrapper de DB).
+- [x] Task 3.3: Implementar Mocks iniciales de estos servicios para tests.
 
 ### Verification
-- [ ] Tests unitarios pasando para los Wrappers con sus Mocks.
+- [x] Tests unitarios pasando para los Wrappers con sus Mocks.
 
 ## Phase 4: Database Schema & Persistence
 Configurar la persistencia de datos inicial.
