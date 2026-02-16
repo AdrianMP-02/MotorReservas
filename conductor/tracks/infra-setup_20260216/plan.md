@@ -23,12 +23,12 @@ Levantar los servicios base necesarios para el motor.
 Inicializar la aplicación y la estructura de módulos.
 
 ### Tasks
-- [ ] Task 2.1: Generar proyecto NestJS base en el directorio raíz.
-- [ ] Task 2.2: Implementar el `HealthModule` y el endpoint `GET /health`.
-- [ ] Task 2.3: Configurar el sistema de configuración global (`@nestjs/config`).
+- [x] Task 2.1: Generar proyecto NestJS base en el directorio raíz.
+- [x] Task 2.2: Implementar el `HealthModule` y el endpoint `GET /health`.
+- [x] Task 2.3: Configurar el sistema de configuración global (`@nestjs/config`).
 
 ### Verification
-- [ ] `npm run start:dev` y consulta exitosa a `localhost:3000/health`.
+- [x] `npm run start:dev` y consulta exitosa a `localhost:3000/health`.
 
 ## Phase 3: Domain Wrappers (Agnosticism)
 Definir las interfaces para evitar el acoplamiento a librerías externas.
