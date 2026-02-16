@@ -23,12 +23,12 @@ Gestión de stock y disponibilidad.
 Implementación técnica del bloqueo en Redis.
 
 ### Tasks
-- [ ] Task 2.1: Implementar el wrapper real `RedisCacheService` (conectando Redis real).
-- [ ] Task 2.2: Implementar lógica de `lock/unlock` usando comandos SET NX.
-- [ ] Task 2.3: Crear un Decorador o Interceptor para facilitar el uso de bloqueos en métodos.
+- [x] Task 2.1: Implementar el wrapper real `RedisCacheService` (conectando Redis real).
+- [x] Task 2.2: Implementar lógica de `lock/unlock` usando comandos SET NX.
+- [x] Task 2.3: Crear un Decorador o Interceptor para facilitar el uso de bloqueos en métodos.
 
 ### Verification
-- [ ] Test de integración que verifique que el segundo intento de lock en el mismo recurso falla mientas esté activo.
+- [x] Test de integración que verifique que el segundo intento de lock en el mismo recurso falla mientas esté activo.
 
 ## Phase 3: Atomic Booking Flow
 Lógica de reserva competitiva.
