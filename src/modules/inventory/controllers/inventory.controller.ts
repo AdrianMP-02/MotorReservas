@@ -3,11 +3,14 @@ import { InventoryService } from '../services/inventory.service';
 
 @Controller('inventory')
 export class InventoryController {
-  constructor(private readonly inventoryService: InventoryService) { }
+  constructor(private readonly inventoryService: InventoryService) {}
 
   @Post('init')
   async initialize(@Body() body: { resourceName: string; totalStock: number }) {
-    return this.inventoryService.initializeStock(body.resourceName, body.totalStock);
+    return this.inventoryService.initializeStock(
+      body.resourceName,
+      body.totalStock,
+    );
   }
 
   @Get(':resourceName')

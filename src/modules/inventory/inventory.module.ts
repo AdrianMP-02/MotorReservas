@@ -11,4 +11,4 @@ import { InventoryRepository } from './repositories/inventory.repository';
   providers: [InventoryService, InventoryRepository],
   exports: [InventoryService, InventoryRepository],
 })
-export class InventoryModule { }
+export class InventoryModule {}

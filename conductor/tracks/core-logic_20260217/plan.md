@@ -34,12 +34,12 @@ Implementación técnica del bloqueo en Redis.
 Lógica de reserva competitiva.
 
 ### Tasks
-- [ ] Task 3.1: Implementar `BookingService.createBooking` con flujo: Lock -> Transaction Start -> Stock Check -> Stock Decrease -> Create Booking -> Transaction Commit -> Unlock.
-- [ ] Task 3.2: Implementar rollback manual de stock en caso de fallo de transacción (si aplica).
-- [ ] Task 3.3: Implementar `BookingController` para recibir peticiones de reserva.
+- [x] Task 3.1: Implementar `BookingService.createBooking` con flujo: Lock -> Transaction Start -> Stock Check -> Stock Decrease -> Create Booking -> Transaction Commit -> Unlock.
+- [x] Task 3.2: Implementar rollback manual de stock en caso de fallo de transacción (si aplica).
+- [x] Task 3.3: Implementar `BookingController` para recibir peticiones de reserva.
 
 ### Verification
-- [ ] Test unitario con mocks simulando transacciones exitosas y fallidas.
+- [x] Test unitario con mocks simulando transacciones exitosas y fallidas.
 
 ## Phase 4: Concurrency Testing
 Validación de la promesa de "0% Overbooking".

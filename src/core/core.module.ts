@@ -12,4 +12,4 @@ import { RedisCacheService } from './cache/redis-cache.service';
   ],
   exports: [ICacheService],
 })
-export class CoreModule { }
+export class CoreModule {}

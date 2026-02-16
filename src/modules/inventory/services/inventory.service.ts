@@ -1,15 +1,25 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InventoryRepository } from '../repositories/inventory.repository';
 import { Inventory } from '../entities/inventory.entity';
 
 @Injectable()
 export class InventoryService {
-  constructor(private readonly inventoryRepository: InventoryRepository) { }
+  constructor(private readonly inventoryRepository: InventoryRepository) {}
 
-  async initializeStock(resourceName: string, totalStock: number): Promise<Inventory> {
-    const existing = await this.inventoryRepository.findByResourceName(resourceName);
+  async initializeStock(
+    resourceName: string,
+    totalStock: number,
+  ): Promise<Inventory> {
+    const existing =
+      await this.inventoryRepository.findByResourceName(resourceName);
     if (existing) {
-      throw new ConflictException(`Resource ${resourceName} already initialized`);
+      throw new ConflictException(
+        `Resource ${resourceName} already initialized`,
+      );
     }
 
     const inventory = new Inventory();
@@ -21,7 +31,8 @@ export class InventoryService {
   }
 
   async getBalance(resourceName: string): Promise<Inventory> {
-    const inventory = await this.inventoryRepository.findByResourceName(resourceName);
+    const inventory =
+      await this.inventoryRepository.findByResourceName(resourceName);
     if (!inventory) {
       throw new NotFoundException(`Resource ${resourceName} not found`);
     }

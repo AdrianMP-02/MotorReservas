@@ -4,10 +4,12 @@ import Redis from 'ioredis';
 import { ICacheService } from './cache-service.interface';
 
 @Injectable()
-export class RedisCacheService implements ICacheService, OnModuleInit, OnModuleDestroy {
+export class RedisCacheService
+  implements ICacheService, OnModuleInit, OnModuleDestroy
+{
   private redisClient: Redis;
 
-  constructor(private readonly configService: ConfigService) { }
+  constructor(private readonly configService: ConfigService) {}
 
   onModuleInit() {
     this.redisClient = new Redis({
@@ -47,7 +49,13 @@ export class RedisCacheService implements ICacheService, OnModuleInit, OnModuleD
     const lockKey = `lock:${key}`;
     // SET resource_name my_random_value NX PX 30000
     // Simplified: we just use 'locked' as value for now
-    const result = await this.redisClient.set(lockKey, 'locked', 'PX', ttl, 'NX');
+    const result = await this.redisClient.set(
+      lockKey,
+      'locked',
+      'PX',
+      ttl,
+      'NX',
+    );
     return result === 'OK';
   }
 

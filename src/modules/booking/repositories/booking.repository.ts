@@ -2,11 +2,11 @@ import { Repository, DataSource, EntityManager } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { IRepository } from '../../../core/database/repository.interface';
-import { Inventory } from '../entities/inventory.entity';
+import { Booking } from '../entities/booking.entity';
 
 @Injectable()
-export class InventoryRepository implements IRepository<Inventory> {
-  private readonly repository: Repository<Inventory>;
+export class BookingRepository implements IRepository<Booking> {
+  private readonly repository: Repository<Booking>;
 
   constructor(
     @InjectDataSource()
@@ -14,23 +14,19 @@ export class InventoryRepository implements IRepository<Inventory> {
     private readonly manager?: EntityManager,
   ) {
     this.repository = this.manager
-      ? this.manager.getRepository(Inventory)
-      : this.dataSource.getRepository(Inventory);
+      ? this.manager.getRepository(Booking)
+      : this.dataSource.getRepository(Booking);
   }
 
-  async findOne(id: string): Promise<Inventory | null> {
+  async findOne(id: string): Promise<Booking | null> {
     return this.repository.findOne({ where: { id } });
   }
 
-  async findByResourceName(resourceName: string): Promise<Inventory | null> {
-    return this.repository.findOne({ where: { resourceName } });
-  }
-
-  async findAll(): Promise<Inventory[]> {
+  async findAll(): Promise<Booking[]> {
     return this.repository.find();
   }
 
-  async save(entity: Inventory): Promise<Inventory> {
+  async save(entity: Booking): Promise<Booking> {
     return this.repository.save(entity);
   }
 
@@ -40,10 +36,7 @@ export class InventoryRepository implements IRepository<Inventory> {
 
   async transaction<R>(work: (repo: this) => Promise<R>): Promise<R> {
     return this.dataSource.transaction(async (manager) => {
-      const scopedRepo = new InventoryRepository(
-        this.dataSource,
-        manager,
-      ) as any;
+      const scopedRepo = new BookingRepository(this.dataSource, manager) as any;
       return await work(scopedRepo);
     });
   }
