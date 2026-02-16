@@ -45,17 +45,17 @@ Definir las interfaces para evitar el acoplamiento a librerías externas.
 Configurar la persistencia de datos inicial.
 
 ### Tasks
-- [ ] Task 4.1: Configurar TypeORM con el driver de MySQL.
-- [ ] Task 4.2: Crear entidades base: `Inventory` y `Booking`.
-- [ ] Task 4.3: Generar y ejecutar la migración inicial del esquema.
+- [x] Task 4.1: Configurar TypeORM con el driver de MySQL.
+- [x] Task 4.2: Crear entidades base: `Inventory` y `Booking`.
+- [x] Task 4.3: Generar y ejecutar la migración inicial del esquema.
 
 ### Verification
-- [ ] Verificar creación de tablas en MySQL mediante cliente SQL.
+- [x] Verificar creación de tablas en MySQL mediante cliente SQL.
 
 ## Final Verification
-- [ ] All acceptance criteria met.
-- [ ] Tests passing.
-- [ ] Documentation updated in `README.md`.
+- [x] All acceptance criteria met.
+- [x] Tests passing.
+- [x] Documentation updated in `README.md`.
 
 ---
 
