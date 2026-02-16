@@ -1,0 +1,18 @@
+{
+  "id": "core-logic_20260217",
+  "title": "Core Booking Logic",
+  "type": "feature",
+  "status": "in_progress",
+  "created": "2026-02-17T00:11:00Z",
+  "updated": "2026-02-17T00:13:00Z",
+  "current_phase": 1,
+  "current_task": "2.1",
+  "phases": {
+    "total": 4,
+    "completed": 1
+  },
+  "tasks": {
+    "total": 11,
+    "completed": 3
+  }
+}

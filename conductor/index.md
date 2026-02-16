@@ -12,7 +12,8 @@ Navigation hub for project context.
 
 ## Active Tracks
 
-- [ ] [Infrastructure & Core Setup](./tracks/infra-setup_20260216/index.md) (infra-setup_20260216)
+- [x] [Infrastructure & Core Setup](./tracks/infra-setup_20260216/index.md) (infra-setup_20260216)
+- [ ] [Core Booking Logic](./tracks/core-logic_20260217/index.md) (core-logic_20260217)
 
 ## Getting Started
 
