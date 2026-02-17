@@ -1,20 +1,54 @@
-import { Controller, Post, Body } from '@nestjs/common';
-import { BookingService } from '../services/booking.service';
-import { DistributedLock } from '../../../core/decorators/distributed-lock.decorator';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  HttpStatus,
+  HttpCode,
+} from '@nestjs/common';
+import { InjectQueue } from '@nestjs/bullmq';
+import { Queue } from 'bullmq';
 
 @Controller('bookings')
 export class BookingController {
-  constructor(private readonly bookingService: BookingService) {}
+  constructor(
+    @InjectQueue('booking-queue') private readonly bookingQueue: Queue,
+  ) {}
 
   @Post()
-  @DistributedLock(':resourceName', 10000) // 10s TTL
+  @HttpCode(HttpStatus.ACCEPTED)
   async create(
     @Body() body: { resourceName: string; userId: string; quantity: number },
   ) {
-    return this.bookingService.createBooking(
-      body.resourceName,
-      body.userId,
-      body.quantity,
-    );
+    const job = await this.bookingQueue.add('create-booking', body, {
+      attempts: 1, // No reintentar si falla por stock (regla de negocio)
+      removeOnComplete: true,
+    });
+
+    return {
+      message: 'Reserva en proceso',
+      jobId: job.id,
+    };
+  }
+
+  @Get('status/:id')
+  async getStatus(@Param('id') id: string) {
+    const job = await this.bookingQueue.getJob(id);
+
+    if (!job) {
+      return { status: 'not_found' };
+    }
+
+    const state: string = await job.getState();
+    const result: unknown = job.returnvalue;
+    const reason: string | undefined = job.failedReason;
+
+    return {
+      id: job.id,
+      status: state,
+      result: result || null,
+      error: reason || null,
+    };
   }
 }

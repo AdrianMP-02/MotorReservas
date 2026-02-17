@@ -43,7 +43,7 @@ export class InventoryRepository implements IRepository<Inventory> {
       const scopedRepo = new InventoryRepository(
         this.dataSource,
         manager,
-      ) as any;
+      ) as this;
       return await work(scopedRepo);
     });
   }

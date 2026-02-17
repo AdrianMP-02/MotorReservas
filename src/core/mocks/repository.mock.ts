@@ -1,24 +1,27 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IRepository } from '../database/repository.interface';
 
 export class MockRepository<T> implements IRepository<T> {
   protected entities: T[] = [];
 
-  async findOne(id: string | number): Promise<T | null> {
+  findOne(_: string | number): Promise<T | null> {
     // Basic mock implementation, would normally check an 'id' property
-    return (this.entities[0] as any) || null;
+    const entity = this.entities[0] as T | undefined;
+    return Promise.resolve(entity || null);
   }
 
-  async findAll(): Promise<T[]> {
-    return this.entities;
+  findAll(): Promise<T[]> {
+    return Promise.resolve(this.entities);
   }
 
-  async save(entity: T): Promise<T> {
+  save(entity: T): Promise<T> {
     this.entities.push(entity);
-    return entity;
+    return Promise.resolve(entity);
   }
 
-  async delete(id: string | number): Promise<void> {
+  delete(_: string | number): Promise<void> {
     this.entities.pop();
+    return Promise.resolve();
   }
 
   async transaction<R>(work: (repo: this) => Promise<R>): Promise<R> {

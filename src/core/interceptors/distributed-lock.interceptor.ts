@@ -18,7 +18,7 @@ export class DistributedLockInterceptor implements NestInterceptor {
     private readonly reflector: Reflector,
     @Inject(ICacheService)
     private readonly cacheService: ICacheService,
-  ) {}
+  ) { }
 
   async intercept(
     context: ExecutionContext,
@@ -39,9 +39,15 @@ export class DistributedLockInterceptor implements NestInterceptor {
     let actualKey = resourceKey;
     if (resourceKey.startsWith(':')) {
       const paramName = resourceKey.substring(1);
-      const request = context.switchToHttp().getRequest();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const request = context.switchToHttp().getRequest<any>();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
       actualKey =
-        request.params[paramName] || request.body[paramName] || resourceKey;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        (request.params && request.params[paramName]) ||
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        (request.body && request.body[paramName]) ||
+        resourceKey;
     }
 
     const acquired = await this.cacheService.lock(actualKey, ttl);
@@ -50,8 +56,8 @@ export class DistributedLockInterceptor implements NestInterceptor {
     }
 
     return next.handle().pipe(
-      finalize(async () => {
-        await this.cacheService.unlock(actualKey);
+      finalize(() => {
+        void this.cacheService.unlock(actualKey);
       }),
     );
   }

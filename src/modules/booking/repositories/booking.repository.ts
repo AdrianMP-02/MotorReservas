@@ -36,7 +36,10 @@ export class BookingRepository implements IRepository<Booking> {
 
   async transaction<R>(work: (repo: this) => Promise<R>): Promise<R> {
     return this.dataSource.transaction(async (manager) => {
-      const scopedRepo = new BookingRepository(this.dataSource, manager) as any;
+      const scopedRepo = new BookingRepository(
+        this.dataSource,
+        manager,
+      ) as this;
       return await work(scopedRepo);
     });
   }

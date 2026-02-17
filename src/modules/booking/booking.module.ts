@@ -5,11 +5,19 @@ import { BookingController } from './controllers/booking.controller';
 import { BookingService } from './services/booking.service';
 import { BookingRepository } from './repositories/booking.repository';
 import { InventoryModule } from '../inventory/inventory.module';
+import { BullModule } from '@nestjs/bullmq';
+import { BookingProcessor } from './booking.processor';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Booking]), InventoryModule],
+  imports: [
+    TypeOrmModule.forFeature([Booking]),
+    InventoryModule,
+    BullModule.registerQueue({
+      name: 'booking-queue',
+    }),
+  ],
   controllers: [BookingController],
-  providers: [BookingService, BookingRepository],
+  providers: [BookingService, BookingRepository, BookingProcessor],
   exports: [BookingService, BookingRepository],
 })
 export class BookingModule {}

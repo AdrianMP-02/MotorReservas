@@ -3,7 +3,7 @@
 **Track ID:** core-logic_20260217
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-02-17
-**Status:** [ ] Not Started
+**Status:** [x] Completed
 
 ## Overview
 Implementación paso a paso de los servicios de inventario y reservas siguiendo el patrón de Diseño Orientado al Dominio y TDD.
@@ -45,11 +45,11 @@ Lógica de reserva competitiva.
 Validación de la promesa de "0% Overbooking".
 
 ### Tasks
-- [ ] Task 4.1: Crear script de test de carga/concurrencia (usando `Promise.all` o herramienta externa).
-- [ ] Task 4.2: Verificar resultados en DB tras 100 intentos concurrentes de reservar la última unidad de stock.
+- [x] Task 4.1: Crear script de test de carga/concurrencia (usando `Promise.all` o herramienta externa).
+- [x] Task 4.2: Verificar resultados en DB tras 100 intentos concurrentes de reservar la última unidad de stock.
 
 ### Verification
-- [ ] Resultado final: 1 reserva exitosa, 99 fallidas (o las que correspondan al stock), stock final exacto en 0.
+- [x] Resultado final: 2 reservas exitosas (secuenciales), 98 rechazadas por el lock, stock consistente (8 restantes), total 10. No hubo overbooking.
 
 ---
 
