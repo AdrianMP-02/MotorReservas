@@ -1,0 +1,18 @@
+{
+  "id": "unittests_20260220",
+  "title": "Unit Testing Implementation",
+  "type": "feature",
+  "status": "in_progress",
+  "created": "2026-02-20T15:02:00Z",
+  "updated": "2026-02-20T15:02:00Z",
+  "current_phase": 1,
+  "current_task": "1.1",
+  "phases": {
+    "total": 3,
+    "completed": 0
+  },
+  "tasks": {
+    "total": 5,
+    "completed": 0
+  }
+}
