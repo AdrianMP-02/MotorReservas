@@ -1,0 +1,18 @@
+{
+  "id": "idempotency_20260220",
+  "title": "Idempotency Implementation",
+  "type": "feature",
+  "status": "completed",
+  "created": "2026-02-20T14:52:00Z",
+  "updated": "2026-02-20T14:58:00Z",
+  "current_phase": 3,
+  "current_task": "3.1",
+  "phases": {
+    "total": 3,
+    "completed": 3
+  },
+  "tasks": {
+    "total": 5,
+    "completed": 5
+  }
+}

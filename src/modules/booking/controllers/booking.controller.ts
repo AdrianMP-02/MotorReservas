@@ -6,6 +6,7 @@ import {
   Param,
   HttpStatus,
   HttpCode,
+  Headers,
 } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
@@ -14,18 +15,25 @@ import { Queue } from 'bullmq';
 export class BookingController {
   constructor(
     @InjectQueue('booking-queue') private readonly bookingQueue: Queue,
-  ) {}
+  ) { }
 
   @Post()
   @HttpCode(HttpStatus.ACCEPTED)
   async create(
     @Body() body: { resourceName: string; userId: string; quantity: number },
+    @Headers('x-idempotency-key') idempotencyKey?: string,
   ) {
-    const job = await this.bookingQueue.add('create-booking', body, {
+    const options: import('bullmq').JobsOptions = {
       attempts: 1, // No reintentar si falla por stock (regla de negocio)
       removeOnComplete: 1000, // Mantener los últimos 1000 completados en el dashboard
       removeOnFail: 1000, // Mantener los últimos 1000 fallidos
-    });
+    };
+
+    if (idempotencyKey) {
+      options.jobId = idempotencyKey;
+    }
+
+    const job = await this.bookingQueue.add('create-booking', body, options);
 
     return {
       message: 'Reserva en proceso',
