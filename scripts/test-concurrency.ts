@@ -1,10 +1,32 @@
 import axios from 'axios';
+import { execSync } from 'child_process';
 
 async function runTest() {
   const resourceName = 'Habitacion_Suite_101';
   const totalStock = 10;
   const requests = 100;
   const url = 'http://localhost:3000';
+
+  console.log(`--- Preparando Entorno de Test ---`);
+  try {
+    // We clear Redis (flushes BullMQ queues)
+    execSync('docker exec booking-redis redis-cli FLUSHALL');
+    console.log('Redis limpiado (Colas vaciadas).');
+
+    // We clear the Database
+    execSync(
+      'docker exec booking-mysql mysql -u booking_user -pbooking_pass booking_db -e "DELETE FROM bookings; DELETE FROM inventory;"',
+    );
+    console.log('Base de datos limpiada (Reservas e Inventario eliminados).');
+
+    // Give external systems a tiny bit of time to settle
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  } catch (error) {
+    console.warn(
+      'Atención: No se pudo limpiar el entorno. Es posible que el test arroje falsos negativos.',
+      error instanceof Error ? error.message : '',
+    );
+  }
 
   console.log(`--- Iniciando Test de Concurrencia ---`);
 

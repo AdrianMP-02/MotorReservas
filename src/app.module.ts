@@ -9,6 +9,9 @@ import { CoreModule } from './core/core.module';
 import { BookingModule } from './modules/booking/booking.module';
 import { BullModule } from '@nestjs/bullmq';
 
+import { BullBoardModule } from '@bull-board/nestjs';
+import { ExpressAdapter } from '@bull-board/express';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -21,6 +24,10 @@ import { BullModule } from '@nestjs/bullmq';
         },
       }),
       inject: [ConfigService],
+    }),
+    BullBoardModule.forRoot({
+      route: '/admin/queues',
+      adapter: ExpressAdapter, // Using Express by default in NestJS
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

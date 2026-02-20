@@ -23,7 +23,8 @@ export class BookingController {
   ) {
     const job = await this.bookingQueue.add('create-booking', body, {
       attempts: 1, // No reintentar si falla por stock (regla de negocio)
-      removeOnComplete: true,
+      removeOnComplete: 1000, // Mantener los últimos 1000 completados en el dashboard
+      removeOnFail: 1000, // Mantener los últimos 1000 fallidos
     });
 
     return {

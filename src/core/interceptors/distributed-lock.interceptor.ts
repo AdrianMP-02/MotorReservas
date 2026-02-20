@@ -18,7 +18,7 @@ export class DistributedLockInterceptor implements NestInterceptor {
     private readonly reflector: Reflector,
     @Inject(ICacheService)
     private readonly cacheService: ICacheService,
-  ) { }
+  ) {}
 
   async intercept(
     context: ExecutionContext,
@@ -41,7 +41,7 @@ export class DistributedLockInterceptor implements NestInterceptor {
       const paramName = resourceKey.substring(1);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const request = context.switchToHttp().getRequest<any>();
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       actualKey =
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         (request.params && request.params[paramName]) ||

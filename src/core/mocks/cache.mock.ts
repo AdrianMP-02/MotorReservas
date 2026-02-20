@@ -6,9 +6,10 @@ export class MockCacheService implements ICacheService {
   private locks = new Set<string>();
 
   get<T>(key: string): Promise<T | null> {
-    const val = this.storage.get(key);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    return Promise.resolve((val as any) || null);
+    const val = this.storage.get(key);
+
+    return Promise.resolve(val || null);
   }
 
   set<T>(key: string, value: T, _ttl?: number): Promise<void> {
